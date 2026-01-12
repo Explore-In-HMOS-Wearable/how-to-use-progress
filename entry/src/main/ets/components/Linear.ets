@@ -5,54 +5,58 @@ import { CounterComponent, CounterType } from '@kit.ArkUI';
 export default struct Linear {
   @ObjectLink timer: Timer;
   // controls
-  @State smoothEffect: boolean = false
-  @State scanEffect: boolean = false
-  @State strokeWidth: number = 4
+  @State smoothEffect: boolean = false;
+  @State scanEffect: boolean = false;
+  @State strokeWidth: number = 4;
 
   build() {
     Swiper() {
       RelativeContainer() {
         Column() {
-          Text('Linear')
-          Blank().layoutWeight(1)
+          Text('Linear');
+          Blank().layoutWeight(1);
           Progress({
             type: ProgressType.Linear,
             value: this.timer.progress,
-            total: this.timer.goal,
+            total: this.timer.goal
           })
             .style({
               enableSmoothEffect: this.smoothEffect,
               enableScanEffect: this.scanEffect,
-              strokeWidth: this.strokeWidth,
-            })
-          Blank().layoutWeight(1)
+              strokeWidth: this.strokeWidth
+            });
+          Blank().layoutWeight(1);
         }
         .size({ width: '70%', height: '80%' })
         .alignRules({
           center: { anchor: '__container__', align: VerticalAlign.Center },
           middle: { anchor: '__container__', align: HorizontalAlign.Center }
-        })
-      }
+        });
+      };
 
       RelativeContainer() {
         Column() {
-          Text('Linear')
+          Text('Linear');
 
           Row() {
-            Text('Smooth Effect')
-            Blank().layoutWeight(1)
-            Toggle({ type: ToggleType.Switch, isOn: $$this.smoothEffect })
-          }
+            Text('Smooth Effect');
+            Blank().layoutWeight(1);
+            Toggle({ type: ToggleType.Switch, isOn: this.smoothEffect }).onChange((isOn) => {
+              this.smoothEffect = isOn;
+            });
+          };
 
           Row() {
-            Text('Scan Effect')
-            Blank().layoutWeight(1)
-            Toggle({ type: ToggleType.Switch, isOn: $$this.scanEffect })
-          }
+            Text('Scan Effect');
+            Blank().layoutWeight(1);
+            Toggle({ type: ToggleType.Switch, isOn: this.scanEffect }).onChange((isOn) => {
+              this.scanEffect = isOn;
+            });
+          };
 
           Row() {
-            Text('Width')
-            Blank().layoutWeight(1)
+            Text('Width');
+            Blank().layoutWeight(1);
             CounterComponent({
               options: {
                 type: CounterType.COMPACT,
@@ -62,23 +66,23 @@ export default struct Linear {
                   max: 25,
                   focusable: false,
                   onChange: (val: number) => {
-                    this.strokeWidth = val
+                    this.strokeWidth = val;
                   }
-                },
+                }
               }
-            })
+            });
           }
-          .alignItems(VerticalAlign.Center)
+          .alignItems(VerticalAlign.Center);
         }
         .size({ width: '70%', height: '80%' })
         .alignRules({
           center: { anchor: '__container__', align: VerticalAlign.Center },
           middle: { anchor: '__container__', align: HorizontalAlign.Center }
-        })
-      }
+        });
+      };
 
     }
     .loop(false)
-    .effectMode(EdgeEffect.None)
+    .effectMode(EdgeEffect.None);
   }
 }

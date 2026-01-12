@@ -17,14 +17,14 @@ This codelab shows how to use and customize the Progress component.
 
 - Create different progress bars and control them.
 
-# TechStack
+# Tech Stack
 
 - **Languages**: ArkTS, ArkUI
 - **Frameworks**: HarmonyOS SDK 5.1.0(18)
 - **Tools**: DevEco Studio Vers 5.1.0.820
 - **Libraries**: @kit.ArkUI
 
-## Directory Structure
+# Directory Structure
 
 ```
 ├───components                           

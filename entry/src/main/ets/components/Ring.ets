@@ -10,12 +10,12 @@ export default struct Ring {
     { color: $r('app.color.purple_gradient_3'), offset: 0.6 },
     { color: $r('app.color.purple_gradient_4'), offset: 0.8 },
     { color: $r('app.color.purple_gradient_5'), offset: 1 }
-  ])
-  @State smoothEffect: boolean = false
-  @State scanEffect: boolean = false
-  @State statusProgressing: boolean = true
-  @State status: ProgressStatus = ProgressStatus.PROGRESSING
-  @State strokeWidth: number = 4
+  ]);
+  @State smoothEffect: boolean = false;
+  @State scanEffect: boolean = false;
+  @State statusProgressing: boolean = true;
+  @State status: ProgressStatus = ProgressStatus.PROGRESSING;
+  @State strokeWidth: number = 4;
 
   build() {
     Swiper() {
@@ -24,7 +24,7 @@ export default struct Ring {
           Progress({
             type: ProgressType.Ring,
             value: this.timer.progress,
-            total: this.timer.goal,
+            total: this.timer.goal
           })
             .size({ width: '100%', height: '100%' })
             .color(this._purpleGradient)
@@ -32,55 +32,60 @@ export default struct Ring {
               enableSmoothEffect: this.smoothEffect,
               enableScanEffect: this.scanEffect,
               status: this.status,
-              strokeWidth: this.strokeWidth,
-            })
+              strokeWidth: this.strokeWidth
+            });
 
-          Text('Ring')
+          Text('Ring');
         }
         .size({ width: '70%', height: '80%' })
         .alignRules({
           center: { anchor: '__container__', align: VerticalAlign.Center },
           middle: { anchor: '__container__', align: HorizontalAlign.Center }
-        })
-      }
+        });
+      };
 
       RelativeContainer() {
         Column() {
-          Text('Ring')
+          Text('Ring');
           Row() {
-            Text('Smooth Effect')
-            Blank().layoutWeight(1)
-            Toggle({ type: ToggleType.Switch, isOn: $$this.smoothEffect })
-          }
+            Text('Smooth Effect');
+            Blank().layoutWeight(1);
+            Toggle({ type: ToggleType.Switch, isOn: this.smoothEffect }).onChange((isOn) => {
+              this.smoothEffect = isOn;
+            });
+          };
 
           Row() {
-            Text('Scan Effect')
-            Blank().layoutWeight(1)
-            Toggle({ type: ToggleType.Switch, isOn: $$this.scanEffect })
-          }
+            Text('Scan Effect');
+            Blank().layoutWeight(1);
+            Toggle({ type: ToggleType.Switch, isOn: this.scanEffect }).onChange((isOn) => {
+              this.scanEffect = isOn;
+            });
+          };
 
           Row() {
-            Text('Status')
+            Text('Status');
             Blank().size({
               width: 8
-            })
+            });
             Toggle({ type: ToggleType.Button, isOn: $$this.statusProgressing }) {
               Text(this.statusProgressing ? 'Progressing' : 'Loading')
-                .fontSize(12)
+                .fontSize(12);
             }
             .layoutWeight(1)
             .onChange((isOn: boolean) => {
+              this.statusProgressing = isOn;
               if (isOn) {
-                this.status = ProgressStatus.PROGRESSING
+                this.status = ProgressStatus.PROGRESSING;
               } else {
-                this.status = ProgressStatus.LOADING
+                this.status = ProgressStatus.LOADING;
               }
-            })
-          }
+            });
+          };
 
           Row() {
-            Text('Width')
-            Blank().layoutWeight(1)
+            Text('Width');
+            Blank().layoutWeight(1);
             CounterComponent({
               options: {
                 type: CounterType.COMPACT,
@@ -90,22 +95,22 @@ export default struct Ring {
                   max: 25,
                   focusable: false,
                   onChange: (val: number) => {
-                    this.strokeWidth = val
+                    this.strokeWidth = val;
                   }
-                },
+                }
               }
-            })
+            });
           }
-          .alignItems(VerticalAlign.Center)
+          .alignItems(VerticalAlign.Center);
         }
         .size({ width: '70%', height: '80%' })
         .alignRules({
           center: { anchor: '__container__', align: VerticalAlign.Center },
           middle: { anchor: '__container__', align: HorizontalAlign.Center }
-        })
-      }
+        });
+      };
     }
     .loop(false)
-    .effectMode(EdgeEffect.None)
+    .effectMode(EdgeEffect.None);
   }
 }
